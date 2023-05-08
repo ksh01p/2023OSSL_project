@@ -42,7 +42,7 @@ void find_the_stu(student *a,int n){
     for(int i=0;i<n;i++){
         if(strcmp(a[i].name,name)==0){
             printf("이름: %s\n",a[i].name);
-            printf("학번 : %d",a[i].student_number);
+            printf("학번 : %d\n",a[i].student_number);
             printf("성별 : %s\n",a[i].gender);
             printf("나이 : %d\n",a[i].age);
             printf("RC : %s\n",a[i].rc);
@@ -178,5 +178,6 @@ int main(){
 /*
 5/8 수정 내용 - 
 1. 학생 출력 시 간격 없이 연달아 출력하여서 \n 을 추가하여 가독성을 용이하게 함
-2. 학생 정보 삭제 구현 완료 _delete_the_stu 
+2. 학생 정보 삭제 구현 완료 (delete_the_stu) 
+3. 학생 검색 함수(find_the_stu)에서 학번 뒤에 \n 을 붙여서 가독서을 용이하게 함
 */
