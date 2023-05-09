@@ -1,53 +1,74 @@
-#define SIZE 100
+#define SIZE 100;
 #include <stdio.h>
 #include <string.h>
 
 
 typedef struct{
-    char name[20];
-    int student_number;
-    char gender[2];
-    int age;
-    char rc[20];
-    char building[20];
+        int student_number;
+        char name[20];
+        char gender[2];
+        int age;
+        char rc[20];
+        char building[20];
     }student;
-    // 구조체 
-    
-int selectMenu(); // 메뉴 선택 함수
 
-int add_the_stu(student *a,int n); // 학생 정보 추가 함수
-void read_stu(student *a); // 한 학생의 정보 조회 함수
-void show_all_stu(student *a,int n); // 모든 학생 정보 조회 함수
-int update_the_stu(student *a, int n); // 학생 정보 수정
-int delete_the_stu( student *a,int n); // 학생 장보 삭제
-
-void find_by_name(student *a,int n); // 학생 이름으로 정보 검색
-void find_by_student_num(student *a,int n); // 학생 학번으로 정보 검색
-void find_by_age(student *a,int n); // 학생 나이로 정보 검색
-void find_by_rc(student *a,int n); // 학생 RC로 정보 검색
-
-void save_the_stu(student *a,int n); // 학생 파일 저장
-int load_the_stu(student *a, int n); // 저장된 학생 정보 불러오기
-
-void team_in_age(student *a,int n, int n1, int n2); // 나이로 분류하여 팀 만들기
-
+int selectMenu();//메뉴 선택 함스
+void find_the_stu(student *a,int n);//학생 정보 검색
+void show_all_stu(student *a,int n);//학생 정보 조회
+int add_the_stu(student *a,int n);//학생 정보 추가
+int delete_the_stu( student *a,int n);//학생 장버 삭제
+void save_the_stu( student *a,int n);//학생 파일 저장
+void team_in_age(student *a,int n, int n1, int n2);//나이로 분류하여 팀 만들기
 
 int selectMenu(){
     int menu;
-    printf("\n*** 학생 정보 관리 시스템 ***\n");
-    printf("*                           *\n");
-    printf("*     1. 학생 정보 조회     * \n");
-    printf("*     2. 힉생 정보 추가     * \n");
-    printf("*     3. 학생 정보 삭제     * \n");
-    printf("*     4. 학생 파일 저장     * \n");
-    printf("*     5. 학생 검색          * \n");
-    printf("*     6. 나이로 팀 만들기   * \n");
-    printf("*     0. 종료               * \n");
-    printf("*                           *\n");
-    printf("* * * * * * * * * * * * * * *\n");
-    printf("\n>> 원하는 메뉴는? ");
+    printf("\n*** 점수계산기 ***\n");
+    printf("1. 학생 정보 조회  ");
+    printf("2. 힉생 정보 추가  ");
+    printf("3. 학생 정보 삭제  ");
+    printf("4. 학생 파일 저장  ");
+    printf("5. 학생 검색 ");
+    printf("6. 나이로 팀 만들기 ");
+    printf("0. 종료 ");
+    printf(" >> ");
     scanf("%d", &menu);
     return menu;
+}
+
+void find_the_stu(student *a,int n){
+    char name[10];
+    int flag=0;
+    printf("찾는 학생의 이름을 입력하세요 : ");
+    scanf("%s",name);
+    for(int i=0;i<n;i++){
+        if(strcmp(a[i].name,name)==0){
+            printf("이름: %s  //  ",a[i].name);
+            printf("학번 : %d  //  ",a[i].student_number);
+            printf("성별 : %s  //  ",a[i].gender);
+            printf("나이 : %d  //  ",a[i].age);
+            printf("RC : %s  //  ",a[i].rc);
+            printf("기숙사 : %s  \n",a[i].building);
+            flag++;
+        }
+    }
+    if(flag==0){
+        printf("검색한 학생은 존재하지 않습니다.\n");
+    }
+}
+
+
+void show_all_stu(student *a,int n){
+    if(n==0) printf("\n ==>저장된 학생이 없습니다.\n");
+    for(int i=0;i<n;i++){
+            printf("이름: %s  //  ",a[i].name);
+            printf("학번 : %d  //  ",a[i].student_number);
+            printf("성별 : %s  //  ",a[i].gender);
+            printf("나이 : %d  //  ",a[i].age);
+            printf("RC : %s  //  ",a[i].rc);
+            printf("기숙사 : %s  \n",a[i].building);
+            
+    }
+    
 }
 
 int add_the_stu(student *a,int n){
@@ -66,10 +87,6 @@ int add_the_stu(student *a,int n){
     printf("\n==> 입력완료했습니다. 감사합니다\n");
 
     return 1;
-}
-
-void read_stu(student *a){
-    printf("%s  %d  %s    %d   %s   %s\n",a->name, a->student_number, a->gender, a->age, a->rc, a->building);
 }
 
 void show_all_stu(student *a,int n){
@@ -247,7 +264,7 @@ int main(){
                 save_the_stu(a,count);
             }
         else if(Menu == 5){
-                find_by_name(a,count);
+                find_the_stu(a,count);
             }
         else if(Menu == 6){
             int age=0;
@@ -260,7 +277,7 @@ int main(){
             
         }
         else if(Menu == 0){
-                printf("\n>> 종료!\n");
+                printf("\n==>종료!\n");
                 break;
         }
     }
@@ -280,6 +297,6 @@ int main(){
 1. 학생 검색(find_the_stu)과 학생 출력(show_all/_stu)에서 가독성을 위해서 세로 출력에서 가로로 출력으로 변경함.
 2. 학생 출력(show_all/_stu)에서 저장된 학생이 없을 때 출력하는 문구 밑에 \n을 추가함.
 3. 학생 검색(find_the_stu)에서 검색한 학생이 존재하지 않을 경우에 검색한 학생이 존재하지 않다고 flag를 이용해서 출력함.
-
+<<<<<<< HEAD
 */
 
