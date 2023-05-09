@@ -1,6 +1,7 @@
 #define SIZE 100
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 
 typedef struct{
@@ -39,8 +40,8 @@ int selectMenu(){
     printf("*     1. 학생 정보 조회     * \n");
     printf("*     2. 힉생 정보 추가     * \n");
     printf("*     3. 학생 정보 삭제     * \n");
-    printf("*     4. 학생 파일 저장     * \n");
-    printf("*     5. 학생 검색          * \n");
+    printf("*     4. 학생 정보 검색     * \n");
+    printf("*     5. 학생 파일 저장     * \n");
     printf("*     6. 나이로 팀 만들기   * \n");
     printf("*     0. 종료               * \n");
     printf("*                           *\n");
@@ -63,7 +64,7 @@ int add_the_stu(student *a,int n){
     scanf("%s",a[n].rc);
     printf("학생 소속 기숙사를 입력히세요 : ");
     scanf("%s",a[n].building);
-    printf("\n==> 입력완료했습니다. 감사합니다\n");
+    printf("\n>> 입력완료했습니다. 감사합니다\n");
 
     return 1;
 }
@@ -73,12 +74,14 @@ void read_stu(student *a){
 }
 
 void show_all_stu(student *a,int n){
-    if(n==0) printf("\n ==>저장된 학생이 없습니다.");
-    printf("- - - - - - - - - - 학생 정보 - - - - - - - - - -\n");
-    printf("   이름    학번      성별  나이  RC     기숙사\n");
-    for(int i=0;i<n;i++){
-        printf("%2d ", i + 1);
-        read_stu(&a[i]);
+    if(n==0) printf(">> 저장된 학생이 없습니다.\n");
+    else {
+      printf("- - - - - - - - - - 학생 정보 - - - - - - - - - -\n");
+      printf("   이름    학번      성별  나이  RC     기숙사\n");
+      for(int i=0;i<n;i++){
+          printf("%2d ", i + 1);
+          read_stu(&a[i]);
+      }
     }
     
 }
@@ -93,66 +96,70 @@ void find_by_name(student *a,int n){
     scanf("%s",name);
     for(int i=0;i<n;i++){
         if(strcmp(a[i].name,name)==0){
-            printf("이름: %s\n",a[i].name);
-            printf("학번 : %d\n",a[i].student_number);
-            printf("성별 : %s\n",a[i].gender);
-            printf("나이 : %d\n",a[i].age);
-            printf("RC : %s\n",a[i].rc);
-            printf("기숙사 : %s\n",a[i].building);
+            printf("- - - - - - - - - - 학생 정보 - - - - - - - - - -\n");
+            printf("   이름    학번      성별  나이  RC     기숙사\n");
+            printf("   ");
+            read_stu(&a[i]);
         }
-    }
+        else printf(">> 찾는 학생이 없습니다.\n");
+      }
+    
 }
 
 void find_by_student_num(student *a,int n){
-    int std_id[10];
-    printf("찾는 학생의 이름을 입력하세요 : ");
-    scanf("%d",&(*std_id));
-    for(int i=0;i<n;i++){
-        if(a[i].student_number == *std_id){
-            printf("이름: %s\n",a[i].name);
-            printf("학번 : %d\n",a[i].student_number);
-            printf("성별 : %s\n",a[i].gender);
-            printf("나이 : %d\n",a[i].age);
-            printf("RC : %s\n",a[i].rc);
-            printf("기숙사 : %s\n",a[i].building);
-        }
+    if(n==0) printf(">> 저장된 학생이 없습니다.\n");
+    else {
+      int std_id[10];
+      printf("찾는 학생의 학번을 입력하세요 : ");
+      scanf("%d",&(*std_id));
+      for(int i=0;i<n;i++){
+          if(a[i].student_number == *std_id){
+            printf("- - - - - - - - - - 학생 정보 - - - - - - - - - -\n");
+            printf("   이름    학번      성별  나이  RC     기숙사\n");
+            printf("   ");
+            read_stu(&a[i]);
+          }
+          else printf(">> 찾는 학생이 없습니다.\n");
+      }
     }
 }
 
 void find_by_age(student *a,int n){
-    int age[5];
-    printf("찾는 학생의 이름을 입력하세요 : ");
-    scanf("%d",age);
-    for(int i=0;i<n;i++){
-        if(a[i].age == *age){
-            printf("이름: %s\n",a[i].name);
-            printf("학번 : %d\n",a[i].student_number);
-            printf("성별 : %s\n",a[i].gender);
-            printf("나이 : %d\n",a[i].age);
-            printf("RC : %s\n",a[i].rc);
-            printf("기숙사 : %s\n",a[i].building);
-        }
-    }
+      int age[5];
+      printf("찾는 학생의 나이를 입력하세요 : ");
+      scanf("%d",age);
+      for(int i=0;i<n;i++){
+          if(a[i].age == *age){
+            printf("- - - - - - - - - - 학생 정보 - - - - - - - - - -\n");
+            printf("   이름    학번      성별  나이  RC     기숙사\n");
+            printf("   ");
+            read_stu(&a[i]);
+          }
+          else printf(">> 찾는 학생이 없습니다.\n");
+      }
+    
 }
 
 void find_by_rc(student *a,int n){
-    char rc[10];
-    printf("찾는 학생의 이름을 입력하세요 : ");
-    scanf("%s",rc);
-    for(int i=0;i<n;i++){
-        if(strcmp(a[i].rc,rc)==0){
-            printf("이름: %s\n",a[i].name);
-            printf("학번 : %d\n",a[i].student_number);
-            printf("성별 : %s\n",a[i].gender);
-            printf("나이 : %d\n",a[i].age);
-            printf("RC : %s\n",a[i].rc);
-            printf("기숙사 : %s\n",a[i].building);
-        }
-    }
+      char rc[10];
+      printf("찾는 학생의 RC를 입력하세요 : ");
+      scanf("%s",rc);
+      for(int i=0;i<n;i++){
+          if(strcmp(a[i].rc,rc)==0){
+            printf("- - - - - - - - - - 학생 정보 - - - - - - - - - -\n");
+            printf("   이름    학번      성별  나이  RC     기숙사\n");
+            printf("   ");
+            read_stu(&a[i]);
+          }
+          else printf(">> 찾는 학생이 없습니다.\n");
+      }
+    
 }
 
-int delete_the_stu(student *a,int n){
+int delete_the_stu(student *a, int n){
     char name[10];
+    if(n==0) printf(">> 저장된 학생이 없습니다.\n");
+    else {
     printf("찾는 학생의 이름을 입력하세요 : ");
     scanf("%s",name);
     for(int i=0;i<n;i++){
@@ -161,7 +168,8 @@ int delete_the_stu(student *a,int n){
         }
     }
     
-    return 1;
+  }
+  return 1; 
 }
 
 void save_the_stu(student *a,int n){
@@ -215,13 +223,25 @@ int main(){
             }
         else if(Menu == 3){
                 delete_the_stu(a,count);
-                count--;
             }
         else if(Menu == 4){
-                save_the_stu(a,count);
+                if(count==0){
+                  printf(">> 저장된 학생이 없습니다.\n");
+                }
+                else {
+                  int num;
+                  printf("[1: 이름] [2: 학번] [3: 나이] [4: RC]\n");
+                  printf("무엇으로 검색하시겠습니까? [숫자입력]: ");
+                  scanf("%d", &num);
+                  if(num == 1) find_by_name(a,count);
+                  else if(num == 2) find_by_student_num(a,count);
+                  else if(num == 3) find_by_age(a,count);
+                  else if(num == 4) find_by_rc(a,count);
+                  else printf("잘못된 입력입니다. 다시 입력해주세요.\n");
+                }
             }
         else if(Menu == 5){
-                find_by_name(a,count);
+                save_the_stu(a,count);
             }
         else if(Menu == 6){
             int age=0;
@@ -263,5 +283,7 @@ int main(){
 3. 내용별 찾기 함수 정의 및 내용 구현
 4. 한 학생의 조회 함수와 모든 학생 조회 함수를 따로 구현
 5. 메뉴창 수정
++
+6. 학생 정보 검색 관련 모든 함수 구현 완료
+7. 학생 정보 검색 메뉴를 숫자로 먼저 입력해 검색할 수 있도록 만듬
 */
-
