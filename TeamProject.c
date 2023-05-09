@@ -37,31 +37,36 @@ int selectMenu(){
 
 void find_the_stu(student *a,int n){
     char name[10];
+    int flag=0;
     printf("찾는 학생의 이름을 입력하세요 : ");
     scanf("%s",name);
     for(int i=0;i<n;i++){
         if(strcmp(a[i].name,name)==0){
-            printf("이름: %s\n",a[i].name);
-            printf("학번 : %d\n",a[i].student_number);
-            printf("성별 : %s\n",a[i].gender);
-            printf("나이 : %d\n",a[i].age);
-            printf("RC : %s\n",a[i].rc);
-            printf("기숙사 : %s\n",a[i].building);
+            printf("이름: %s  //  ",a[i].name);
+            printf("학번 : %d  //  ",a[i].student_number);
+            printf("성별 : %s  //  ",a[i].gender);
+            printf("나이 : %d  //  ",a[i].age);
+            printf("RC : %s  //  ",a[i].rc);
+            printf("기숙사 : %s  \n",a[i].building);
+            flag++;
         }
+    }
+    if(flag==0){
+        printf("검색한 학생은 존재하지 않습니다.\n");
     }
 }
 
 
 void show_all_stu(student *a,int n){
-    if(n==0) printf("\n ==>저장된 학생이 없습니다.");
+    if(n==0) printf("\n ==>저장된 학생이 없습니다.\n");
     for(int i=0;i<n;i++){
-            printf("이름: %s\n",a[i].name);
-            printf("학번 : %d\n",a[i].student_number);
-            printf("성별 : %s\n",a[i].gender);
-            printf("나이 : %d\n",a[i].age);
-            printf("RC : %s\n",a[i].rc);
-            printf("기숙사 : %s\n",a[i].building);
-            printf("\n\n");//1
+            printf("이름: %s  //  ",a[i].name);
+            printf("학번 : %d  //  ",a[i].student_number);
+            printf("성별 : %s  //  ",a[i].gender);
+            printf("나이 : %d  //  ",a[i].age);
+            printf("RC : %s  //  ",a[i].rc);
+            printf("기숙사 : %s  \n",a[i].building);
+            
     }
     
 }
@@ -180,4 +185,11 @@ int main(){
 1. 학생 출력 시 간격 없이 연달아 출력하여서 \n 을 추가하여 가독성을 용이하게 함
 2. 학생 정보 삭제 구현 완료 (delete_the_stu) 
 3. 학생 검색 함수(find_the_stu)에서 학번 뒤에 \n 을 붙여서 가독서을 용이하게 함
+*/
+/*
+5/9 수정 내용-
+1. 학생 검색(find_the_stu)과 학생 출력(show_all/_stu)에서 가독성을 위해서 세로 출력에서 가로로 출력으로 변경함.
+2. 학생 출력(show_all/_stu)에서 저장된 학생이 없을 때 출력하는 문구 밑에 \n을 추가함.
+3. 학생 검색(find_the_stu)에서 검색한 학생이 존재하지 않을 경우에 검색한 학생이 존재하지 않다고 flag를 이용해서 출력함.
+
 */
