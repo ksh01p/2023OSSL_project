@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdlib.h> //srand, rand를 사용하기 위한 헤더파일
+#include <time.h> // time을 사용하기 위한 헤더파일
 
 
 typedef struct{
@@ -12,10 +14,12 @@ typedef struct{
     char rc[20];
     char building[20];
     }student;
-    // 구조체 
-    
-int selectMenu(); // 메뉴 선택 함수
+    // 학사 정보를 위한 구조체 
 
+
+
+
+int selectMenu(); // 메뉴 선택 함수
 int add_the_stu(student *a,int n); // 학생 정보 추가 함수
 void read_stu(student *a); // 한 학생의 정보 조회 함수
 void show_all_stu(student *a,int n); // 모든 학생 정보 조회 함수
@@ -31,6 +35,9 @@ void save_the_stu(student *a,int n); // 학생 파일 저장
 int load_the_stu(student *a, int n); // 저장된 학생 정보 불러오기
 
 void team_in_age(student *a,int n, int n1, int n2); // 나이로 분류하여 팀 만들기
+
+
+
 
 
 int selectMenu(){
@@ -186,31 +193,64 @@ void save_the_stu(student *a,int n){
     }   
 }
 
-void team_in_age(student *a,int n, int n1, int n2){
-    int count_0=0;
-    int index=0;
-    while(1){
+void team_in_age(student *a,int n , int n1, int n2){
+    /*
+    a,count,age,team_num
+    a,  n  ,n1 , n2
+    */
+    student slist[n2];
+    //int count_0=0;//출력을 끝내기 위한 index
+    int index=0;//list의 index
+    int random[n2];
+    for(int i=0;i<n;i++){
+        /*if(count_0==n2){
+            printf("---------출력완료---------");
+            break;
+        }*/
         if(n<n2){
             printf("학생 수가 구성원 수보다 적습니다!");
             break;
         }
-        else if(count_0>n2){
-            printf("이상 , 팀원입니다. 감사합니다!");
-        }
-        if(a[index].age==n1){
-            
-            count_0++;
-            printf("%s",a[index].name);
+        else if(a[i].age==n1){
+            slist[index].age=a[i].age;
+            slist[index].student_number=a[i].student_number;
+            strcpy(slist[index].name,a[i].name);
+            strcpy(slist[index].gender,a[index].gender);
+            strcpy(slist[index].rc,a[index].rc);
+            strcpy(slist[index].building,a[index].building);
             index++;
+            //count_0++;
+            }
         }
-    }
-}
+            srand((unsigned)time(NULL));
+            printf("- - - - - - - - - - 학생 정보 - - - - - - - - - -\n");
+            printf("   이름    학번      성별  나이  RC     기숙사\n");
+            printf("   ");
+            for(int j=0;j<n2;j++){
+                random[j]=rand()%index;
+                /*for(int k =0 ;j<k;k++){
+                    if(random[j]==random[k]) {
+                        
+                        j--;
+                    }*/
+                    
+                        //printf("%d\n",random[j]);
+                        read_stu(&slist[random[j]]);
+                    
+            }
+                
+        }
+        
+    
+
+
 
 
 int main(){
     int Menu=0;
     student a[1000];
     int count=0;
+    int semister=0;
     while(1){
         Menu=selectMenu();
         if(Menu==1){
@@ -253,31 +293,35 @@ int main(){
             team_in_age(a,count,age,team_num);
             
         }
+ 
+        
         else if(Menu == 0){
                 printf("\n>> 종료!\n");
                 break;
         }
+        
     }
 }
 
 
 
 /*
-5/8 수정 내용 - 
+5/8(월) 수정 내용 (KSH) 
 1. 학생 출력 시 간격 없이 연달아 출력하여서 \n 을 추가하여 가독성을 용이하게 함
 2. 학생 정보 삭제 구현 완료 (delete_the_stu) 
 3. 학생 검색 함수(find_the_stu)에서 학번 뒤에 \n 을 붙여서 가독서을 용이하게 함
 */
 
 /*
-5/9 수정 내용 -
+5/9(화) 수정 내용 (KSH) 
 1. 학생 검색(find_the_stu)과 학생 출력(show_all/_stu)에서 가독성을 위해서 세로 출력에서 가로로 출력으로 변경함.
 2. 학생 출력(show_all/_stu)에서 저장된 학생이 없을 때 출력하는 문구 밑에 \n을 추가함.
 3. 학생 검색(find_the_stu)에서 검색한 학생이 존재하지 않을 경우에 검색한 학생이 존재하지 않다고 flag를 이용해서 출력함.
+
 */
 
 /*
-5/9 수정 내용 (KMS)
+5/9(화) 수정 내용 (KMS)
 1. #define SIZE의 내용 수정
 2. 계획한 모든 함수 정의
 3. 내용별 찾기 함수 정의 및 내용 구현
@@ -286,4 +330,18 @@ int main(){
 +
 6. 학생 정보 검색 관련 모든 함수 구현 완료
 7. 학생 정보 검색 메뉴를 숫자로 먼저 입력해 검색할 수 있도록 만듬
+*/
+
+/*
+5/11(목) 수정 내용(KSH)
+1. team_in_age 구현중 
+    <디버깅 해야 하는 항목>
+    - 중복 없이 난수 생성하는 방법
+    - 2번 실행 시 bus error
+2. delete_the_stu 디버깅중
+    <디버깅 해야 하는 항목>
+    - 삭제 시, int 데이터 타입은 '0'라고 명시된다.
+
+
+
 */
