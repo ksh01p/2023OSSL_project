@@ -434,7 +434,7 @@ int main() {
 */
 
 /*
-5/15(화) 수정 내용 (KMS)
+5/15() 수정 내용 (KMS)
 1. update_the_stu, load_the_stu 함수 구현 완료
 2. save_the_stu, find_by_age, find_by_rc 함수 수정 완료
 3. delete_the_stu 구현 완료
