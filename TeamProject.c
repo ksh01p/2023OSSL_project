@@ -1,4 +1,4 @@
-#define SIZE 100
+#define SIZE 1000
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -13,6 +13,10 @@ typedef struct{
     int age;
     char rc[20];
     char building[20];
+    char email[100];
+    char major[100];
+    int phone;
+
     }student;
     // 학사 정보를 위한 구조체 
 
@@ -45,14 +49,14 @@ int selectMenu(){
     printf("*     4. 학생 정보 삭제     * \n");
     printf("*     5. 학생 정보 검색     * \n");
     printf("*     6. 학생 파일 저장     * \n");
-    printf("*     7. 나이로 팀 만들기   * \n");
+    printf("*     7. 학생 파일 불러오기 * \n");
     printf("*     0. 종료               * \n");
     printf("*                           *\n");
     printf("* * * * * * * * * * * * * * *\n");
     printf("\n>> 원하는 메뉴는? ");
     scanf("%d", &menu);
     return menu;
-}
+}//(v)
 
 int add_the_stu(student *a,int n){
     printf("학생 이름을 입력하세요 : ");
@@ -67,27 +71,33 @@ int add_the_stu(student *a,int n){
     scanf("%s",a[n].rc);
     printf("학생 소속 기숙사를 입력히세요 : ");
     scanf("%s",a[n].building);
+    printf("한동 대학교 이메일을 입력히세요 : ");
+    scanf("%s",a[n].email);
+    printf("학생 개인 전화번호를 입력히세요 : ");
+    scanf("%d",&a[n].phone);
+    printf("학생 전공을 입력히세요 : ");
+    scanf("%s",a[n].major);
     printf("\n>> 입력완료했습니다. 감사합니다.\n");
 
     return 1;
-}
+}//(v)
 
 void read_stu(student *a){
-    printf("%s  %d  %s    %d   %s   %s\n",a->name, a->student_number, a->gender, a->age, a->rc, a->building);
-}
+    printf("%s  %d  %s    %d   %s   %s    %s     %d     %s\n",a->name, a->student_number, a->gender, a->age, a->rc, a->building,a->email,a->phone,a->major);
+}//(v)
 
 void show_all_stu(student *a,int n){
     if(n==0) printf(">> 저장된 학생이 없습니다.\n");
     else {
-      printf("- - - - - - - - - - 학생 정보 - - - - - - - - - -\n");
-      printf("   이름    학번      성별  나이  RC     기숙사\n");
+      printf("- - - - - - - - - - - - - - - - - 학생 정보 - - - - - - - - - - - - - - - - -\n");
+      printf("   이름    학번      성별  나이  RC     기숙사      전공        이메일        전화번호\n");
       for(int i=0;i<n;i++){
           printf("%2d ", i + 1);
           read_stu(&a[i]);
       }
     }
     
-}
+}//(v)
 
 int update_the_stu(student *a, int n){
     if(n==0){
@@ -122,10 +132,16 @@ int update_the_stu(student *a, int n){
     scanf("%s", a[foundIndex].rc);
     printf("수정할 학생 소속 기숙사를 입력하세요: ");
     scanf("%s", a[foundIndex].building);
+    printf("수정할 학생 이메일을 입력하세요: ");
+    scanf("%s", a[foundIndex].email);
+    printf("수정할 학생 개인번호를 입력하세요: ");
+    scanf("%d", &a[foundIndex].phone);
+    printf("수정할 학생 전공을 입력하세요: ");
+    scanf("%s", a[foundIndex].major);
 
     printf("\n>> 수정이 완료되었습니다.\n");
     return 1;
-}
+}//(v)
 
 void find_by_name(student *a,int n){
     char name[10];
@@ -133,8 +149,8 @@ void find_by_name(student *a,int n){
     scanf("%s",name);
     for(int i=0;i<n;i++){
         if(strcmp(a[i].name,name)==0){
-            printf("- - - - - - - - - - 학생 정보 - - - - - - - - - -\n");
-            printf("   이름    학번      성별  나이  RC     기숙사\n");
+            printf("- - - - - - - - - - - - - - - - - 학생 정보 - - - - - - - - - - - - - - - - -\n");
+            printf("   이름    학번      성별  나이  RC     기숙사      전공        이메일        전화번호\n");
             printf("   ");
             read_stu(&a[i]);
             break;
@@ -142,7 +158,7 @@ void find_by_name(student *a,int n){
         else printf(">> 찾는 학생이 없습니다.\n");
       }
     
-}
+}//(v)
 
 void find_by_student_num(student *a,int n){
     if(n==0) printf(">> 저장된 학생이 없습니다.\n");
@@ -152,8 +168,8 @@ void find_by_student_num(student *a,int n){
       scanf("%d",&(*std_id));
       for(int i=0;i<n;i++){
           if(a[i].student_number == *std_id){
-            printf("- - - - - - - - - - 학생 정보 - - - - - - - - - -\n");
-            printf("   이름    학번      성별  나이  RC     기숙사\n");
+            printf("- - - - - - - - - - - - - - - - - 학생 정보 - - - - - - - - - - - - - - - - -\n");
+            printf("   이름    학번      성별  나이  RC     기숙사      전공        이메일        전화번호\n");
             printf("   ");
             read_stu(&a[i]);
             break;
@@ -161,14 +177,16 @@ void find_by_student_num(student *a,int n){
           else printf(">> 찾는 학생이 없습니다.\n");
       }
     }
-}
+}//(v)
+
+
 
 void find_by_age(student *a, int n) {
     int age;
     printf("찾는 학생의 나이를 입력하세요: ");
     scanf("%d", &age);
-    printf("- - - - - - - - - - 학생 정보 - - - - - - - - - -\n");
-    printf("   이름    학번      성별  나이  RC     기숙사\n");
+    printf("- - - - - - - - - - - - - - - - - 학생 정보 - - - - - - - - - - - - - - - - -\n");
+            printf("   이름    학번      성별  나이  RC     기숙사      전공        이메일        전화번호\n");
     int found = 0; 
     for (int i = 0; i < n; i++) {
         if (a[i].age == age) {
@@ -180,14 +198,16 @@ void find_by_age(student *a, int n) {
     if (!found) {
         printf(">> 찾는 학생이 없습니다.\n");
     }
-}
+}//(v)
+
+
 
 void find_by_rc(student *a, int n) {
     char rc[10];
     printf("찾는 학생의 RC를 입력하세요: ");
     scanf("%s", rc);
-    printf("- - - - - - - - - - 학생 정보 - - - - - - - - - -\n");
-    printf("   이름    학번      성별  나이  RC     기숙사\n");
+    printf("- - - - - - - - - - - - - - - - - 학생 정보 - - - - - - - - - - - - - - - - -\n");
+            printf("   이름    학번      성별  나이  RC     기숙사      전공        이메일        전화번호\n");
     int found = 0;
 
     for (int i = 0; i < n; i++) {
@@ -201,7 +221,78 @@ void find_by_rc(student *a, int n) {
     if (!found) {
         printf(">> 찾는 학생이 없습니다.\n");
     }
-}
+}//(v)
+
+
+
+
+void find_by_email(student *a, int n) {
+    char email[100];
+    printf("찾는 학생의 email을 입력하세요: ");
+    scanf("%s", email);
+    printf("- - - - - - - - - - - - - - - - - 학생 정보 - - - - - - - - - - - - - - - - -\n");
+    printf("   이름    학번      성별  나이  RC     기숙사      전공        이메일        전화번호\n");
+    int found = 0;
+
+    for (int i = 0; i < n; i++) {
+        if (strcmp(a[i].email, email) == 0) {
+            printf("   ");
+            read_stu(&a[i]);
+            found = 1;
+        }
+    }
+
+    if (!found) {
+        printf(">> 찾는 학생이 없습니다.\n");
+    }
+}//(v)
+
+
+void find_by_major(student *a, int n) {
+    char major[10];
+    printf("찾는 학생의 전공을 입력하세요: ");
+    scanf("%s", major);
+    printf("- - - - - - - - - - - - - - - - - 학생 정보 - - - - - - - - - - - - - - - - -\n");
+    printf("   이름    학번      성별  나이  RC     기숙사      전공        이메일        전화번호\n");
+    int found = 0;
+
+    for (int i = 0; i < n; i++) {
+        if (strcmp(a[i].major, major) == 0) {
+            printf("   ");
+            read_stu(&a[i]);
+            found = 1;
+        }
+    }
+
+    if (!found) {
+        printf(">> 찾는 학생이 없습니다.\n");
+    }
+}//(v)
+
+
+
+void find_by_phone(student *a,int n){
+    if(n==0) printf(">> 저장된 학생이 없습니다.\n");
+    else {
+      int phone[10];
+      printf("찾는 학생의 학번을 입력하세요 : ");
+      scanf("%d",&(*phone));
+      for(int i=0;i<n;i++){
+          if(a[i].phone == *phone){
+            printf("- - - - - - - - - - - - - - - - - 학생 정보 - - - - - - - - - - - - - - - - -\n");
+            printf("   이름    학번      성별  나이  RC     기숙사      전공        이메일        전화번호\n");
+            printf("   ");
+            read_stu(&a[i]);
+            break;
+          }
+          else printf(">> 찾는 학생이 없습니다.\n");
+      }
+    }
+}//(v)
+
+
+
+
 
 int delete_the_stu(student *a, int n) {
     if (n == 0) {
@@ -234,21 +325,27 @@ int delete_the_stu(student *a, int n) {
     return n - 1;
 }
 
+
+
 void save_the_stu(student *a, int n) {
     FILE *fp;
     fp = fopen("datalist.txt", "wt");
     for (int i = 0; i < n; i++) {
-        fprintf(fp, "%d.\n", i + 1);
         fprintf(fp, "%s\n", a[i].name);
         fprintf(fp, "%d\n", a[i].student_number);
         fprintf(fp, "%s\n", a[i].gender);
         fprintf(fp, "%d\n", a[i].age);
         fprintf(fp, "%s\n", a[i].rc);
         fprintf(fp, "%s\n", a[i].building);
+        fprintf(fp, "%s\n", a[i].email);
+        fprintf(fp, "%d\n", a[i].phone);
+        fprintf(fp, "%s\n", a[i].major);
     }
     fclose(fp);
     printf(">> 성공적으로 저장되었습니다!");
 }
+
+
 
 int load_the_stu(student *a, int n) {
     FILE *fp;
@@ -256,71 +353,27 @@ int load_the_stu(student *a, int n) {
 
     int i = 0;
     while (!feof(fp)) {
-        fscanf(fp, "%*d.\n");
         fscanf(fp, "%s\n", a[i].name);
         fscanf(fp, "%d\n", &a[i].student_number);
         fscanf(fp, "%s\n", a[i].gender);
         fscanf(fp, "%d\n", &a[i].age);
         fscanf(fp, "%s\n", a[i].rc);
         fscanf(fp, "%s\n", a[i].building);
+        fscanf(fp, "%s\n", a[i].email);
+        fscanf(fp, "%d\n", &a[i].phone);
+        fscanf(fp, "%s\n", a[i].major);
         i++;
     }
     fclose(fp);
+    printf("\n>> 성공적으로 불러왔습니다!\n");
     return i;
 }
 
-void team_in_age(student *a,int n , int n1, int n2){
-    /*
-    a,count,age,team_num
-    a,  n  ,n1 , n2
-    */
-    student slist[n2];
-    //int count_0=0;//출력을 끝내기 위한 index
-    int index=0;//list의 index
-    int random[n2];
-    for(int i=0;i<n;i++){
-        /*if(count_0==n2){
-            printf("---------출력완료---------");
-            break;
-        }*/
-        if(n<n2){
-            printf("학생 수가 구성원 수보다 적습니다!");
-            break;
-        }
-        else if(a[i].age==n1){
-            slist[index].age=a[i].age;
-            slist[index].student_number=a[i].student_number;
-            strcpy(slist[index].name,a[i].name);
-            strcpy(slist[index].gender,a[index].gender);
-            strcpy(slist[index].rc,a[index].rc);
-            strcpy(slist[index].building,a[index].building);
-            index++;
-            //count_0++;
-            }
-        }
-            srand((unsigned)time(NULL));
-            printf("- - - - - - - - - - 학생 정보 - - - - - - - - - -\n");
-            printf("   이름    학번      성별  나이  RC     기숙사\n");
-            printf("   ");
-            for(int j=0;j<n2;j++){
-                random[j]=rand()%index;
-                /*for(int k =0 ;j<k;k++){
-                    if(random[j]==random[k]) {
-                        
-                        j--;
-                    }*/
-                    
-                        //printf("%d\n",random[j]);
-                        read_stu(&slist[random[j]]);
-                    
-            }
-                
-        }
-        
+
 
 int main() {
     int Menu = 0;
-    student a[1000];
+    student a[SIZE];
     int count = 0;
     int semister = 0;
 
@@ -330,7 +383,7 @@ int main() {
         printf(">> 파일에 저장된 학생이 없습니다.\n");
         printf(">> 학생 정보를 불러오는 데 실패했습니다.\n");
     } else {
-        printf(">> 성공적으로 학생 정보를 불러왔습니다.\n");
+        //printf(">> 성공적으로 학생 정보를 불러왔습니다.\n");
     }
 
     while (1) {
@@ -354,7 +407,7 @@ int main() {
             }
             else {
                 int num;
-                printf("[1: 이름] [2: 학번] [3: 나이] [4: RC]\n");
+                printf("[1: 이름] [2: 학번] [3: 나이] [4: RC] [5: Email] [6: 전화번호] [7: 전공] \n");
                 printf("무엇으로 검색하시겠습니까? [숫자입력]: ");
                 scanf("%d", &num);
                 if (num == 1)
@@ -365,6 +418,12 @@ int main() {
                     find_by_age(a, count);
                 else if (num == 4)
                     find_by_rc(a, count);
+                else if (num == 5)
+                    find_by_email(a, count);
+                else if (num == 6)
+                    find_by_phone(a, count);
+                else if (num == 7)
+                    find_by_major(a, count);
                 else
                     printf("잘못된 입력입니다. 다시 입력해주세요.\n");
             }
@@ -372,15 +431,10 @@ int main() {
         else if (Menu == 6) {
             save_the_stu(a, count);
         }
-        else if (Menu == 7) {
-            int age = 0;
-            int team_num = 0;
-            printf("팀으로 만들고 싶은 나이를 입력하세요  : ");
-            scanf("%d", &age);
-            printf("팀 구성원의 수를 입력하세요 : ");
-            scanf("%d", &team_num);
-            team_in_age(a, count, age, team_num);
+        else if(Menu == 7){
+            count=load_the_stu(a,count);
         }
+       
         else if (Menu == 0) {
             printf(">> 프로그램을 종료합니다.\n");
             break;
@@ -438,4 +492,15 @@ int main() {
 1. update_the_stu, load_the_stu 함수 구현 완료
 2. save_the_stu, find_by_age, find_by_rc 함수 수정 완료
 3. delete_the_stu 구현 완료
+*/
+
+/*
+5/16(화) 수정 내용(KSH)
+1. load_the_file 구현 완료
+2. datalist.txt 파일에 미리 학생정보 기입함
+3. FileIO 확인(불러오기 후 추가 후 저장 시 실제 txt에 저장되는 지 ) 완료
+==> 정상 작동
+4. 구조체 안에 학생 개인 이메일, 전화번호 그리고 전공을 추가했습니다.
+==> 구조체 안에 새로운 인적사항들을 모든 함수에 다시 적용했습니다.
+
 */
