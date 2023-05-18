@@ -19,7 +19,7 @@
 ## 🏢 Han Manage에 대한 소개
   - 복잡한 학생 정보를 간편하게 관리해주는 Han Manage 입니다. 
   - 간단한 입력을 통하여 학생 정보를 정리해줍니다.
-  - 학생 나이 정보를 바탕으로 팀을 꾸려줍니다.
+  - 한 정보만으로 학생의 모든 정보를 찾아볼 수 있습니다.
 
 <br/>
   
@@ -28,7 +28,6 @@
   - 학생 정보 수정 기능 
   - 학생 정보 삭제 기능
   - 학생 정보 검색 기능
-  - 나이로 분류하여 랜덤으로 팀 설정
 
 <br/>
 
@@ -42,25 +41,31 @@ typedef struct{
     int age;
     char rc[20];
     char building[20];
+    char email[100];
+    char major[100];
+    int phone;
+
     }student;
-    // 구조체 
-    
-int selectMenu(); //메뉴 선택 함수
+    // 학사 정보를 위한 구조체 
 
-int add_the_stu(student *a,int n); //학생 정보 추가
-void show_all_stu(student *a,int n); //학생 정보 조회
-int update_the_stu(student *a, int n); //학생 정보 수정
-int delete_the_stu( student *a,int n); //학생 장보 삭제
 
-void find_by_name(student *a,int n); //학생 이름으로 정보 검색
-void find_by_student_num(student *a,int n); //학생 학번으로 정보 검색
-void find_by_age(student *a,int n); //학생 나이로 정보 검색
-void find_by_rc(student *a,int n); //학생 RC로 정보 검색
+int selectMenu(); // 메뉴 선택 함수
+int add_the_stu(student *a,int n); // 학생 정보 추가 함수
+void read_stu(student *a); // 한 학생의 정보 조회 함수
+void show_all_stu(student *a,int n); // 모든 학생 정보 조회 함수
+int update_the_stu(student *a, int n); // 학생 정보 수정
+int delete_the_stu( student *a,int n); // 학생 장보 삭제
 
-void save_the_stu(student *a,int n); //학생 파일 저장
-int load_the_stu(student *a, int n); //저장된 학생 정보 불러오기
+void find_by_name(student *a,int n); // 학생 이름으로 정보 검색
+void find_by_student_num(student *a,int n); // 학생 학번으로 정보 검색
+void find_by_age(student *a,int n); // 학생 나이로 정보 검색
+void find_by_rc(student *a,int n); // 학생 RC로 정보 검색
+void find_by_major(student *a, int n);// 학생 전공으로 정보 검색
+void find_by_phone(student *a,int n);// 학생 번호로 정보 검색
+void find_by_email(student *a, int n);// 학생 이메일로 정보 검색
 
-void team_in_age(student *a,int n, int n1, int n2); //나이로 분류하여 팀 만들기
+void save_the_stu(student *a,int n); // 학생 파일 저장
+int load_the_stu(student *a, int n); // 저장된 학생 정보 불러오기
 
 ```
 
