@@ -32,11 +32,14 @@ void find_by_name(student *a,int n); // 학생 이름으로 정보 검색
 void find_by_student_num(student *a,int n); // 학생 학번으로 정보 검색
 void find_by_age(student *a,int n); // 학생 나이로 정보 검색
 void find_by_rc(student *a,int n); // 학생 RC로 정보 검색
+void find_by_major(student *a, int n);// 학생 전공으로 정보 검색
+void find_by_phone(student *a,int n);// 학생 번호로 정보 검색
+void find_by_email(student *a, int n);// 학생 이메일로 정보 검색
 
 void save_the_stu(student *a,int n); // 학생 파일 저장
 int load_the_stu(student *a, int n); // 저장된 학생 정보 불러오기
 
-void team_in_age(student *a,int n, int n1, int n2); // 나이로 분류하여 팀 만들기
+
 
 
 int selectMenu(){
