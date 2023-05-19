@@ -12,6 +12,7 @@ int selectMenu(){
     printf("*     5. 학생 정보 검색     * \n");
     printf("*     6. 학생 파일 저장     * \n");
     printf("*     7. 학생 파일 불러오기 * \n");
+    printf("*     8. 학생 추첨하기 * \n");
     printf("*     0. 종료               * \n");
     printf("*                           *\n");
     printf("* * * * * * * * * * * * * * *\n");
@@ -332,7 +333,17 @@ int load_the_stu(student *a, int n) {
 }
 
 
+void print_random(student *a, int n){
+    srand(time(NULL));
+    int random=0;
+    random = rand()%n;    
+    printf("- - - - - - - - - - - - - - - - - 추첨 학생 정보 - - - - - - - - - - - - - - - - -\n");
+    printf("   이름    학번      성별  나이  RC     기숙사      전공        이메일        전화번호\n");
+    printf("   ");
+    read_stu(&a[random]);
 
+
+}
 
 /*
 5/8(월) 수정 내용 (KSH) 

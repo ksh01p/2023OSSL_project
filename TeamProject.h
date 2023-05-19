@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdlib.h> 
+#include <time.h> 
 
 typedef struct{
     char name[20];
@@ -34,5 +36,7 @@ void find_by_email(student *a, int n);// 학생 이메일로 정보 검색
 
 void save_the_stu(student *a,int n); // 학생 파일 저장
 int load_the_stu(student *a, int n); // 저장된 학생 정보 불러오기
+
+void print_random(student *a, int n);// 학생 랜덤 추첨하기
 
 

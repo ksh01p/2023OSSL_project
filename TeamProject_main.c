@@ -66,6 +66,11 @@ int main() {
         else if(Menu == 7){
             count=load_the_stu(a,count);
         }
+
+        else if(Menu == 8){
+            print_random(a, count);
+        }
+       
        
         else if (Menu == 0) {
             printf(">> 프로그램을 종료합니다.\n");
